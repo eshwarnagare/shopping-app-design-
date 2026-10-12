@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amazon – Shope Computer &amp; Accesaries</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=42dot+Sans:wght@400;700&amp;family=Abhaya+Libre:wght@700&amp;family=Abril+Fatface&amp;family=Inder&amp;display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   Design tokens
+   ========================================================= */
+:root {
+  /* colors */
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-text-muted: #7f7676;
+  --color-text-soft: #615252;
+  --color-bg-hero: #ddf5f3;
+  --color-bg-blush: #f9eeea;
+  --color-bg-peach: #ffe7dc;
+  --color-bg-rose: #f6dada;
+  --color-bg-mint: #e8fffd;
+  --color-bg-card: #f8fdfd;
+  --color-bg-her: #f6eee5;
+  --color-bg-him: #d0e6f3;
+  --color-bg-footer: #ede9e9;
+  --color-bg-legal: #f9dddd;
+  --color-badge-text: #ffffff;
+
+  /* font families */
+  --font-brand: 'Abril Fatface', Georgia, serif;
+  --font-display: 'Abhaya Libre', Georgia, serif;
+  --font-body: 'Inder', Arial, sans-serif;
+  --font-ui: '42dot Sans', Arial, sans-serif;
+
+  /* font sizes */
+  --fs-12: 12px;
+  --fs-13: 13px;
+  --fs-14: 14px;
+  --fs-15: 15px;
+  --fs-16: 16px;
+  --fs-20: 20px;
+  --fs-24: 24px;
+  --fs-32: 32px;
+  --fs-40: 40px;
+  --fs-48: 48px;
+  --fs-64: 64px;
+  --fs-96: 96px;
+
+  /* font weights / line height */
+  --fw-regular: 400;
+  --fw-bold: 700;
+  --lh-normal: normal;
+
+  /* spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* shape */
+  --radius-card: 10px;
+  --radius-pill: 20px;
+  --border: 1px solid var(--color-black);
+
+  /* layout */
+  --page-width: 1440px;
+  --menu-duration: 0.35s;
+}
+
+/* =========================================================
+   Base
+   ========================================================= */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--color-white);
+  color: var(--color-black);
+  font-family: var(--font-ui);
+  font-size: var(--fs-16);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-normal);
+}
+h1, h2, h3, p, ul { margin: 0; padding: 0; }
+ul { list-style: none; }
+a { color: inherit; text-decoration: none; }
+img { display: block; border: 0; }
+button { font: inherit; }
+
+.page { position: relative; width: var(--page-width); margin: 0 auto; }
+
+/* Shared image-crop helper (reproduces Figma image fills) */
+.media { position: relative; overflow: hidden; }
+.media__img {
+  position: absolute;
+  left: var(--il, 0);
+  top: var(--it, 0);
+  width: var(--iw, 100%);
+  height: var(--ih, 100%);
+  max-width: none;
+}
+.media--cover .media__img { object-fit: cover; }
+.media--flip { transform: scaleX(-1); }
+
+/* Shared button */
+.button {
+  display: flex;
+  align-items: flex-start;
+  background: var(--color-white);
+  border: var(--border);
+  border-radius: var(--radius-pill);
+  color: var(--color-black);
+  font-family: var(--font-ui);
+  white-space: nowrap;
+}
+
+/* =========================================================
+   Header
+   ========================================================= */
+.header { position: relative; z-index: 10; height: 163px; }
+.header__inner { position: relative; height: 163px; }
+.header__logo { position: absolute; left: 35px; top: 93px; width: 66px; height: 70px; }
+.header__logo-img { width: 66px; height: 70px; object-fit: cover; }
+.header__brand {
+  position: absolute; left: 112px; top: 99px;
+  font-family: var(--font-brand);
+  font-size: var(--fs-40);
+  color: var(--color-black);
+  white-space: nowrap;
+}
+.header__toggle { display: none; }
+.header__menu,
+.header__nav,
+.header__tools { display: contents; }
+
+.header__link {
+  position: absolute;
+  font-family: var(--font-body);
+  font-size: var(--fs-15);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+.header__link--all { left: 275px; top: 122px; }
+.header__link--deals { left: 318px; top: 122px; font-size: var(--fs-16); }
+.header__link--gift { left: 450px; top: 124px; }
+.header__link--registry { left: 542px; top: 123px; }
+
+.header__search {
+  position: absolute; left: 1105px; top: 113px;
+  font-family: var(--font-body);
+  font-size: var(--fs-16);
+  color: var(--color-black);
+  white-space: nowrap;
+}
+.header__icon { position: absolute; display: block; }
+.header__icon img { width: 100%; height: 100%; }
+.header__icon--account { left: 1210px; top: 114px; width: 39px; height: 39px; }
+.header__icon--account img { position: absolute; left: 0; top: -15.38%; height: 115.38%; }
+.header__icon--wishlist { left: 1279px; top: 106px; width: 33px; height: 33px; }
+.header__icon--cart { left: 1342px; top: 109px; width: 32px; height: 32px; }
+
+/* =========================================================
+   Hero
+   ========================================================= */
+.hero {
+  position: relative;
+  width: 1358px; height: 747px;
+  margin: 0 0 0 52px;
+  background: var(--color-bg-hero);
+}
+.hero__title {
+  position: absolute; left: 23px; top: 122px; width: 751px;
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-96);
+}
+.hero__text {
+  position: absolute; left: 100px; top: 360px; width: 435px;
+  font-family: var(--font-body);
+  font-size: var(--fs-16);
+}
+.hero__button {
+  position: absolute; left: 100px; top: 472px;
+  width: 147px; height: 47px;
+  padding: 11px 0 0 22px;
+  font-size: var(--fs-16);
+}
+.hero__media { position: absolute; left: 881px; top: 52px; width: 379px; height: 508px; }
+.hero__photo { width: 100%; height: 100%; --ih: 111.91%; --it: -7.04%; }
+.hero__badge { position: absolute; left: 280px; top: 44px; width: 99px; height: 90px; }
+.hero__badge-bg { width: 100%; height: 100%; }
+.hero__badge-text {
+  position: absolute; left: 53.5px; top: 43.5px;
+  width: 71px;
+  font-family: var(--font-ui);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-32);
+  color: var(--color-badge-text);
+  white-space: nowrap;
+  transform: translate(-50%, -50%) rotate(-12.86deg);
+}
+
+/* Spotlight card (JBL) */
+.spotlight {
+  position: absolute; left: 634px; top: 343px;
+  width: 273px; height: 156px;
+  background: var(--color-bg-card);
+  border: var(--border);
+  border-radius: var(--radius-card);
+}
+.spotlight__title { position: absolute; left: 33px; top: 16px; font-size: var(--fs-20); font-weight: var(--fw-regular); white-space: nowrap; }
+.spotlight__stars { position: absolute; left: 58px; top: 64px; display: flex; }
+.spotlight__stars img { width: 16px; height: 16px; }
+.spotlight__stars img:last-child { margin-left: 2px; }
+.spotlight__reviews { position: absolute; left: 150px; top: 65px; font-size: var(--fs-13); color: var(--color-text-muted); white-space: nowrap; }
+.spotlight__currency { position: absolute; left: 51px; top: 92px; width: 15px; height: 24px; }
+.spotlight__amount { position: absolute; left: 76px; top: 92px; font-size: var(--fs-20); }
+.spotlight__link { position: absolute; left: 43px; top: 128px; font-size: var(--fs-13); color: var(--color-text-muted); white-space: nowrap; }
+
+/* =========================================================
+   Shortcuts strip
+   ========================================================= */
+.shortcuts {
+  position: relative;
+  width: 1358px; height: 134px;
+  margin: 37px 0 0 46px;
+  background: var(--color-bg-blush);
+}
+.shortcuts__item { display: contents; }
+.shortcuts__media { position: absolute; }
+.shortcuts__media--avatar { left: 29px; top: 10px; width: 107px; height: 110px; }
+.shortcuts__media--boxes { left: 344px; top: -9px; width: 89px; height: 143px; --ih: 106.27%; --it: -0.05%; }
+.shortcuts__media--headphones { left: 643px; top: 1px; width: 113px; height: 124px; --ih: 136.69%; --it: -12.7%; }
+.shortcuts__media--kettle { left: 983px; top: -21px; width: 117px; height: 151px; --iw: 93.51%; --ih: 87.85%; --it: 12%; }
+.shortcuts__text { position: absolute; font-size: var(--fs-13); color: var(--color-black); white-space: nowrap; }
+.shortcuts__text--profile { left: 172px; top: 38px; }
+.shortcuts__text--orders { left: 501px; top: 37px; }
+.shortcuts__text--electronics { left: 805px; top: 42px; }
+.shortcuts__text--kitchen { left: 1147px; top: 35px; }
+.shortcuts__sub { display: block; color: var(--color-text-muted); }
+.shortcuts__link { position: absolute; left: 484px; top: 69px; font-size: var(--fs-13); color: var(--color-text-muted); white-space: nowrap; }
+
+/* =========================================================
+   Categories
+   ========================================================= */
+.categories { width: 1356px; margin: 54px 0 0 46px; }
+.categories__title { height: 63px; font-size: var(--fs-20); font-weight: var(--fw-regular); }
+.categories__list { display: flex; justify-content: space-between; }
+.categories__card { position: relative; width: 325px; height: 530px; background: var(--color-bg-peach); }
+.categories__media { position: absolute; left: var(--mx); top: var(--my); width: var(--mw); height: var(--mh); }
+.categories__label { position: absolute; left: var(--lx); top: var(--ly); font-size: var(--fs-20); white-space: nowrap; }
+.categories__card--beauty { --mx: 21px; --my: 64px; --mw: 283px; --mh: 313px; --lx: 86px; --ly: 409px; }
+.categories__card--computer { --mx: 61px; --my: 64px; --mw: 264px; --mh: 379px; --lx: 22px; --ly: 409px; }
+.categories__card--computer .categories__media { --iw: 207.85%; }
+.categories__card--vr { --mx: 21px; --my: 86px; --mw: 303px; --mh: 279px; --lx: 81px; --ly: 399px; }
+.categories__card--toy { --mx: 49px; --my: 74px; --mw: 227px; --mh: 303px; --lx: 112px; --ly: 395px; }
+
+/* =========================================================
+   Promos
+   ========================================================= */
+.promos { position: relative; width: 1356px; height: 203px; margin: 19px 0 0 46px; }
+.promos__card { position: absolute; top: 0; height: 200px; background: var(--color-bg-rose); }
+.promos__card--basic { left: 0; width: 668px; }
+.promos__card--deals { left: 686px; top: 3px; width: 670px; }
+.promos__body { display: contents; }
+.promos__title { position: absolute; left: var(--tx); top: var(--ty); font-size: var(--fs-32); font-weight: var(--fw-regular); white-space: nowrap; }
+.promos__text { position: absolute; left: var(--px); top: var(--py); font-size: var(--fs-13); color: var(--color-text-soft); white-space: nowrap; }
+.promos__link { position: absolute; left: var(--lx); top: var(--ly); font-size: var(--fs-13); color: var(--color-text-soft); white-space: nowrap; }
+.promos__media { position: absolute; left: var(--mx); top: var(--my); width: var(--mw); height: var(--mh); }
+.promos__card--basic { --tx: 30px; --ty: 16px; --px: 27px; --py: 71px; --lx: 37px; --ly: 165px; --mx: 387px; --my: -82px; --mw: 281px; --mh: 285px; }
+.promos__card--basic .promos__media { --iw: 122.07%; --ih: 158.92%; --it: -29.46%; }
+.promos__card--deals { --tx: 40px; --ty: 23px; --px: 40px; --py: 68px; --lx: 64px; --ly: 159px; --mx: 381px; --my: 0px; --mw: 289px; --mh: 200px; }
+.promos__card--deals .promos__media { --iw: 113.15%; --ih: 218%; --it: -59%; }
+
+/* =========================================================
+   Delivery banner
+   ========================================================= */
+.delivery { position: relative; width: 1348px; height: 361px; margin: 59px 0 0 46px; background: var(--color-bg-mint); }
+.delivery__body { display: contents; }
+.delivery__media { position: absolute; left: 700px; top: 0; width: 550px; height: 361px; --ih: 152.35%; --it: -15.24%; }
+.delivery__title { position: absolute; left: 125px; top: 25px; width: 646px; font-size: var(--fs-48); font-weight: var(--fw-bold); }
+.delivery__text { position: absolute; left: 125px; top: 149px; width: 562px; font-size: var(--fs-15); font-weight: var(--fw-bold); }
+.delivery__smile { position: absolute; left: 340px; top: 171px; width: 20px; height: 20px; }
+.delivery__smile img { position: absolute; left: 18.47%; top: 18.47%; width: 63.06%; height: 63.06%; }
+.delivery__button {
+  position: absolute; left: 135px; top: 236px;
+  width: 263px; height: 47px;
+  padding: 6px 0 0 65px;
+  font-size: var(--fs-24);
+  font-weight: var(--fw-bold);
+}
+
+/* =========================================================
+   Last viewed products
+   ========================================================= */
+.products { position: relative; width: 1342px; height: 402px; margin: 19px 0 0 52px; }
+.products__label { position: absolute; left: 5px; top: 0; font-size: var(--fs-12); font-weight: var(--fw-bold); }
+.products__list { display: block; }
+.product { position: absolute; top: 28px; left: var(--left); width: 262px; height: 374px; background: var(--color-bg-blush); }
+.product__media { position: absolute; left: var(--mx); top: var(--my); width: var(--mw); height: var(--mh); }
+.product__shop,
+.product__type,
+.product__review,
+.product__name,
+.product__amount { position: absolute; white-space: nowrap; font-weight: var(--fw-bold); }
+.product__shop { left: var(--sx); top: var(--sy); font-size: var(--fs-12); color: var(--color-text-muted); }
+.product__name { left: var(--nx); top: var(--ny); font-size: var(--fs-24); }
+.product__type { left: var(--tx); top: var(--ty); font-size: var(--fs-12); }
+.product__rating, .product__price { display: contents; }
+.product__stars { position: absolute; left: var(--stx); top: var(--sty); display: flex; gap: var(--stg); }
+.product__stars img { width: 16px; height: 16px; }
+.product__review { left: var(--rx); top: var(--ry); font-size: var(--fs-12); color: var(--color-text-muted); }
+.product__currency { position: absolute; left: var(--cx); top: var(--cy); width: 15px; height: 24px; }
+.product__amount { left: var(--ax); top: var(--ay); font-size: var(--fs-24); }
+
+.product--one   { --left: 0px;   --mx: 18px; --my: 29px; --mw: 215px; --mh: 208px; --sx: 5px;  --sy: 199px; --nx: 83px;  --ny: 221px; --tx: 64px; --ty: 252px; --stx: 59px; --sty: 276px; --stg: 4px;   --rx: 167px; --ry: 276px; --cx: 75px; --cy: 307px; --ax: 95px;  --ay: 305px; }
+.product--two   { --left: 313px; --mx: 28px; --my: 55px; --mw: 208px; --mh: 156px; --sx: 9px;  --sy: 199px; --nx: 100px; --ny: 214px; --tx: 93px; --ty: 249px; --stx: 105px; --sty: 274px; --stg: 4.5px; --rx: 177px; --ry: 276px; --cx: 85px; --cy: 307px; --ax: 111px; --ay: 303px; }
+.product--two .product__media { --iw: 116.6%; --il: -9.43%; }
+.product--three { --left: 634px; --mx: 17px; --my: 64px; --mw: 228px; --mh: 177px; --sx: 8px;  --sy: 196px; --nx: 96px;  --ny: 214px; --tx: 79px; --ty: 249px; --stx: 69px;  --sty: 279px; --stg: 3px;   --rx: 171px; --ry: 280px; --cx: 77px; --cy: 304px; --ax: 96px;  --ay: 303px; }
+.product--four  { --left: 956px; --mx: 51px; --my: 64px; --mw: 161px; --mh: 108px; --sx: 13px; --sy: 195px; --nx: 95px;  --ny: 217px; --tx: 78px; --ty: 244px; --stx: 91px;  --sty: 274px; --stg: 2px;   --rx: 170px; --ry: 275px; --cx: 76px; --cy: 296px; --ax: 95px;  --ay: 296px; }
+
+/* =========================================================
+   Fashion banners
+   ========================================================= */
+.fashion { position: relative; width: 1342px; height: 348px; margin: 18px 0 0 52px; }
+.fashion__card { position: absolute; top: 0; width: 662px; height: 348px; }
+.fashion__card--her { left: 0; background: var(--color-bg-her); --tx: 48px; --ty: 24px; --dx: 46px; --dy: 117px; --mx: 392px; --my: 3px; --mw: 259px; --mh: 345px; --ix: 64px; --iy: 174px; --iw2: 132px; --ih2: 163px; --nx: 211px; --ny: 219px; --sx: 218px; --sy: 248px; }
+.fashion__card--him { left: 680px; background: var(--color-bg-him); --tx: 41px; --ty: 27px; --dx: 39px; --dy: 119px; --mx: 352px; --my: -18px; --mw: 320px; --mh: 366px; --ix: 67px; --iy: 191px; --iw2: 113px; --ih2: 146px; --nx: 214px; --ny: 211px; --sx: 228px; --sy: 256px; }
+.fashion__body, .fashion__item { display: contents; }
+.fashion__title { position: absolute; left: var(--tx); top: var(--ty); width: 300px; font-size: var(--fs-32); font-weight: var(--fw-bold); }
+.fashion__text { position: absolute; left: var(--dx); top: var(--dy); font-size: var(--fs-16); font-weight: var(--fw-bold); color: var(--color-text-soft); white-space: nowrap; }
+.fashion__model { position: absolute; left: var(--mx); top: var(--my); width: var(--mw); height: var(--mh); }
+.fashion__card--her .fashion__model { --ih: 107.09%; --it: -1.61%; }
+.fashion__thumb { position: absolute; left: var(--ix); top: var(--iy); width: var(--iw2); height: var(--ih2); }
+.fashion__card--her .fashion__thumb { --ih: 108.94%; --it: -0.13%; }
+.fashion__card--him .fashion__thumb { --ih: 101.01%; --it: 0.18%; }
+.fashion__name { position: absolute; left: var(--nx); top: var(--ny); font-size: var(--fs-16); font-weight: var(--fw-bold); white-space: nowrap; }
+.fashion__sale { position: absolute; left: var(--sx); top: var(--sy); font-size: var(--fs-16); font-weight: var(--fw-bold); color: var(--color-text-soft); white-space: nowrap; }
+
+/* =========================================================
+   Footer
+   ========================================================= */
+.footer { margin: 0 0 0 52px; }
+.footer__panel { position: relative; width: 1342px; height: 281px; margin-top: 16px; background: var(--color-bg-footer); }
+.footer__column { position: absolute; left: var(--x); top: var(--y); font-weight: var(--fw-bold); white-space: nowrap; }
+.footer__heading { font-size: var(--fs-16); font-weight: var(--fw-bold); }
+.footer__list { color: var(--color-text-soft); font-size: var(--fs-13); }
+.footer__column--about { --x: 42px; --y: 39px; }
+.footer__column--about .footer__list { font-size: var(--fs-14); }
+.footer__column--earn { --x: 411px; --y: 32px; }
+.footer__column--earn .footer__heading,
+.footer__column--help .footer__heading { font-size: var(--fs-20); }
+.footer__column--help { --x: 726px; --y: 29px; }
+.footer__column--pay { --x: 1046px; --y: 40px; }
+.footer__more { position: absolute; left: 42px; top: 236px; font-size: var(--fs-16); font-weight: var(--fw-bold); white-space: nowrap; }
+
+.footer__legal { position: relative; width: 1344px; height: 56px; margin-top: 16px; background: var(--color-bg-legal); }
+.footer__legal-link,
+.footer__legal-note { position: absolute; font-size: var(--fs-16); font-weight: var(--fw-bold); color: var(--color-text-soft); white-space: nowrap; }
+.footer__legal-link--terms { left: 26px; top: 13px; }
+.footer__legal-link--privacy { left: 234px; top: 13px; }
+.footer__legal-link--ads { left: 411px; top: 11px; }
+.footer__legal-note { left: 988px; top: 12px; color: var(--color-text-muted); }
+
+/* =========================================================
+   Desktop scaling for 1025px – 1439px
+   ========================================================= */
+@media (min-width: 1025px) and (max-width: 1439px) {
+  .page { zoom: 0.75; }
+}
+@media (min-width: 1280px) and (max-width: 1439px) {
+  .page { zoom: 0.92; }
+}
+@supports (zoom: calc(100vw / 1440px)) {
+  @media (min-width: 1025px) and (max-width: 1439px) {
+    .page { zoom: calc(100vw / 1440px); }
+  }
+}
+
+/* =========================================================
+   Tablet (max-width: 1024px)
+   ========================================================= */
+@media (max-width: 1024px) {
+  .page { width: 100%; }
+
+  /* ---- Header + hamburger ---- */
+  .header { height: auto; }
+  .header__inner {
+    display: flex; flex-wrap: wrap; align-items: center;
+    height: auto;
+    padding: var(--space-5);
+  }
+  .header__logo { position: static; width: 56px; height: 59px; }
+  .header__logo-img { width: 56px; height: 59px; }
+  .header__brand { position: static; margin-left: var(--space-3); font-size: var(--fs-32); }
+  .header__toggle {
+    display: inline-flex; flex-direction: column; justify-content: center; gap: 5px;
+    width: 44px; height: 44px; margin-left: auto; padding: 0 10px;
+    background: var(--color-white);
+    border: var(--border);
+    border-radius: var(--radius-card);
+    cursor: pointer;
+  }
+  .header__toggle-bar {
+    display: block; height: 2px; background: var(--color-black);
+    transition: transform var(--menu-duration) ease, opacity var(--menu-duration) ease;
+  }
+  .header__toggle[aria-expanded="true"] .header__toggle-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .header__toggle[aria-expanded="true"] .header__toggle-bar:nth-child(2) { opacity: 0; }
+  .header__toggle[aria-expanded="true"] .header__toggle-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .header__menu {
+    display: block; flex-basis: 100%;
+    max-height: 0; overflow: hidden; opacity: 0; visibility: hidden;
+    transition: max-height var(--menu-duration) ease, opacity var(--menu-duration) ease, visibility 0s linear var(--menu-duration);
+  }
+  .header__menu.is-open {
+    max-height: 480px; opacity: 1; visibility: visible;
+    transition: max-height var(--menu-duration) ease, opacity var(--menu-duration) ease, visibility 0s linear 0s;
+  }
+  .header__nav { display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-4) 0 var(--space-3); }
+  .header__tools { display: flex; align-items: center; gap: var(--space-5); padding: var(--space-3) 0 var(--space-2); }
+  .header__link, .header__search, .header__icon { position: static; }
+  .header__icon--account { position: relative; }
+
+  /* ---- Shared image reset ---- */
+  .media__img { position: static; width: 100%; height: 100%; object-fit: contain; }
+  .media--cover .media__img { object-fit: cover; }
+  .shortcuts__media, .categories__media, .promos__media, .delivery__media,
+  .product__media, .fashion__model, .fashion__thumb { position: relative; left: auto; top: auto; }
+
+  /* ---- Hero ---- */
+  .hero {
+    display: grid; grid-template-columns: minmax(0, 1fr) 300px;
+    column-gap: var(--space-6); row-gap: var(--space-5); align-items: start;
+    width: auto; height: auto;
+    margin: 0 var(--space-5);
+    padding: var(--space-7) var(--space-6);
+  }
+  .hero__title { position: static; width: auto; grid-column: 1; grid-row: 1; font-size: var(--fs-64); }
+  .hero__text { position: static; width: auto; grid-column: 1; grid-row: 2; }
+  .hero__button { position: static; grid-column: 1; grid-row: 3; }
+  .spotlight { position: relative; left: auto; top: auto; grid-column: 1; grid-row: 4; }
+  .hero__media { position: relative; left: auto; top: auto; grid-column: 2; grid-row: 1 / span 4; width: 300px; height: 402px; }
+  .hero__badge { left: auto; right: -8px; top: 12px; }
+
+  /* ---- Shortcuts ---- */
+  .shortcuts {
+    position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5);
+    width: auto; height: auto;
+    margin: var(--space-5) var(--space-5) 0; padding: var(--space-5);
+  }
+  .shortcuts__item { position: relative; display: flex; align-items: center; gap: var(--space-4); }
+  .shortcuts__media { flex: none; width: 90px; height: 100px; }
+  .shortcuts__text, .shortcuts__link { position: static; }
+  .shortcuts__item--orders { flex-wrap: wrap; }
+
+  /* ---- Categories ---- */
+  .categories { width: auto; margin: var(--space-6) var(--space-5) 0; }
+  .categories__title { height: auto; margin-bottom: var(--space-5); }
+  .categories__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); }
+  .categories__card {
+    display: flex; flex-direction: column; align-items: center; gap: var(--space-5);
+    width: auto; height: auto; padding: var(--space-6) var(--space-4) var(--space-5);
+  }
+  .categories__media { width: 100%; height: 340px; }
+  .categories__label { position: static; }
+
+  /* ---- Promos ---- */
+  .promos { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); width: auto; height: auto; margin: var(--space-5) var(--space-5) 0; }
+  .promos__card, .promos__card--deals {
+    position: relative; left: auto; top: auto;
+    display: flex; align-items: center; justify-content: space-between; gap: var(--space-5);
+    width: auto; height: auto; min-height: 200px; padding: var(--space-6);
+  }
+  .promos__body { display: flex; flex-direction: column; gap: var(--space-2); }
+  .promos__title, .promos__text, .promos__link { position: static; }
+  .promos__media { flex: none; width: 220px; height: 180px; }
+
+  /* ---- Delivery ---- */
+  .delivery {
+    display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-5);
+    width: auto; height: auto; margin: var(--space-6) var(--space-5) 0; padding: var(--space-6);
+  }
+  .delivery__body { display: block; }
+  .delivery__title, .delivery__text { position: static; width: auto; }
+  .delivery__text { margin-top: var(--space-4); }
+  .delivery__smile { position: relative; left: auto; top: auto; margin-top: var(--space-2); }
+  .delivery__button { position: relative; left: auto; top: auto; margin-top: var(--space-5); }
+  .delivery__media { width: 100%; height: 320px; }
+
+  /* ---- Products ---- */
+  .products { position: static; width: auto; height: auto; margin: var(--space-6) var(--space-5) 0; }
+  .products__label { position: static; margin-bottom: var(--space-4); }
+  .products__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); }
+  .product {
+    position: relative; top: auto; left: auto;
+    display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2);
+    width: auto; height: auto; padding: var(--space-5);
+  }
+  .product__media { width: 100%; height: 220px; margin-bottom: var(--space-2); }
+  .product__shop, .product__name, .product__type, .product__review,
+  .product__currency, .product__amount, .product__stars { position: static; }
+  .product__rating { display: flex; align-items: center; gap: var(--space-3); }
+  .product__stars { gap: var(--space-1); }
+  .product__price { display: flex; align-items: center; gap: var(--space-1); }
+
+  /* ---- Fashion ---- */
+  .fashion { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); width: auto; height: auto; margin: var(--space-4) var(--space-5) 0; }
+  .fashion__card {
+    position: relative; left: auto; top: auto;
+    display: flex; flex-direction: column; gap: var(--space-5);
+    width: auto; height: auto; padding: var(--space-6);
+  }
+  .fashion__body { display: block; }
+  .fashion__title, .fashion__text { position: static; width: auto; }
+  .fashion__text { margin-top: var(--space-4); }
+  .fashion__item { display: flex; align-items: center; gap: var(--space-4); }
+  .fashion__item-text { display: flex; flex-direction: column; gap: var(--space-2); }
+  .fashion__name, .fashion__sale { position: static; }
+  .fashion__thumb { flex: none; width: 132px; height: 163px; }
+  .fashion__model { width: 100%; height: 360px; }
+
+  /* ---- Footer ---- */
+  .footer { margin: 0 var(--space-5); }
+  .footer__panel {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6);
+    width: auto; height: auto; margin-top: var(--space-4); padding: var(--space-6);
+  }
+  .footer__column { position: static; white-space: normal; }
+  .footer__more { position: static; grid-column: 1 / -1; }
+  .footer__legal {
+    display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-5);
+    width: auto; height: auto; margin-top: var(--space-4); padding: var(--space-4) var(--space-6);
+  }
+  .footer__legal-link, .footer__legal-note { position: static; white-space: normal; }
+  .footer__legal-note { flex-basis: 100%; }
+}
+
+/* =========================================================
+   Mobile (max-width: 768px)
+   ========================================================= */
+@media (max-width: 768px) {
+  .header__inner { padding: var(--space-4); }
+  .header__brand { font-size: var(--fs-24); }
+
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+    margin: 0 var(--space-4);
+    padding: var(--space-6) var(--space-4);
+  }
+  .hero__title { grid-row: 1; font-size: var(--fs-40); }
+  .hero__text { grid-row: 2; width: auto; }
+  .hero__button { grid-row: 3; }
+  .hero__media { grid-column: 1; grid-row: 4; justify-self: center; width: min(100%, 300px); height: 402px; }
+  .spotlight { grid-column: 1; grid-row: 5; justify-self: center; }
+
+  .shortcuts { grid-template-columns: minmax(0, 1fr); margin: var(--space-4) var(--space-4) 0; padding: var(--space-4); }
+
+  .categories { margin: var(--space-5) var(--space-4) 0; }
+  .categories__list { grid-template-columns: minmax(0, 1fr); }
+  .categories__media { height: 300px; }
+
+  .promos { margin: var(--space-4) var(--space-4) 0; }
+  .promos__card, .promos__card--deals { flex-direction: column; align-items: flex-start; padding: var(--space-5); }
+  .promos__media { width: 100%; height: 200px; }
+
+  .delivery { margin: var(--space-5) var(--space-4) 0; padding: var(--space-5); }
+  .delivery__title { font-size: var(--fs-32); }
+  .delivery__media { height: 240px; }
+
+  .products { margin: var(--space-5) var(--space-4) 0; }
+  .products__list { grid-template-columns: minmax(0, 1fr); }
+
+  .fashion { margin: var(--space-4) var(--space-4) 0; }
+  .fashion__card { padding: var(--space-5); }
+  .fashion__title { font-size: var(--fs-24); }
+  .fashion__model { height: 300px; }
+
+  .footer { margin: 0 var(--space-4); }
+  .footer__panel { grid-template-columns: minmax(0, 1fr); padding: var(--space-5); }
+  .footer__legal { padding: var(--space-4) var(--space-5); }
+  .footer__legal-link, .footer__legal-note { font-size: var(--fs-14); }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="header">
+    <div class="header__inner">
+      <a class="header__logo" href="#" aria-label="Amazon home">
+        <img class="header__logo-img" src="https://www.figma.com/api/mcp/asset/c56cd84c-5a8f-45be-b546-cd936fdf5bf9.png" alt="Amazon orange smile logo" width="66" height="70">
+      </a>
+      <a class="header__brand" href="#">amazon</a>
+
+      <button class="header__toggle" type="button" aria-expanded="false" aria-controls="primary-menu" aria-label="Toggle navigation menu">
+        <span class="header__toggle-bar"></span>
+        <span class="header__toggle-bar"></span>
+        <span class="header__toggle-bar"></span>
+      </button>
+
+      <div class="header__menu" id="primary-menu">
+        <nav class="header__nav" aria-label="Primary">
+          <a class="header__link header__link--all" href="#">All</a>
+          <a class="header__link header__link--deals" href="#">Today’s Deals</a>
+          <a class="header__link header__link--gift" href="#">Gift card</a>
+          <a class="header__link header__link--registry" href="#">Ragistry and Gifting</a>
+        </nav>
+        <div class="header__tools">
+          <a class="header__search" href="#">SEACRCH</a>
+          <a class="header__icon header__icon--account" href="#" aria-label="Account">
+            <img src="https://www.figma.com/api/mcp/asset/493de593-8d52-4793-b81c-c2622a393428.svg" alt="">
+          </a>
+          <a class="header__icon header__icon--wishlist" href="#" aria-label="Wishlist">
+            <img src="https://www.figma.com/api/mcp/asset/fc6e4bd2-497e-40fa-b47f-e0fc9247c401.svg" alt="">
+          </a>
+          <a class="header__icon header__icon--cart" href="#" aria-label="Shopping cart">
+            <img src="https://www.figma.com/api/mcp/asset/c45c49f3-9bf9-4c2a-bbac-1b3a63749899.svg" alt="">
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <h1 class="hero__title" id="hero-title">Shope Computer &amp; Accesaries</h1>
+      <p class="hero__text">Shope laptop , desktop, monitor,tablet,PC<br>Gaming,hard drive and storage , accessories and <br>more</p>
+      <a class="button hero__button" href="#">VIEW MORE</a>
+
+      <article class="spotlight">
+        <h2 class="spotlight__title">JBL t40 Black<br>Headphone</h2>
+        <div class="spotlight__stars" role="img" aria-label="Rated 4 out of 5 stars">
+          <img src="https://www.figma.com/api/mcp/asset/95ad71b3-f2e5-44b3-b0e1-679d7041c221.svg" alt="" width="16" height="16">
+          <img src="https://www.figma.com/api/mcp/asset/95ad71b3-f2e5-44b3-b0e1-679d7041c221.svg" alt="" width="16" height="16">
+          <img src="https://www.figma.com/api/mcp/asset/95ad71b3-f2e5-44b3-b0e1-679d7041c221.svg" alt="" width="16" height="16">
+          <img src="https://www.figma.com/api/mcp/asset/95ad71b3-f2e5-44b3-b0e1-679d7041c221.svg" alt="" width="16" height="16">
+        </div>
+        <p class="spotlight__reviews">1320 REVIEWS</p>
+        <img class="spotlight__currency" src="https://www.figma.com/api/mcp/asset/de778853-4fce-407f-b857-65d8a4ab1fd3.svg" alt="Indian rupee">
+        <p class="spotlight__amount">3,000</p>
+        <a class="spotlight__link" href="#">View More</a>
+      </article>
+
+      <div class="hero__media">
+        <div class="media media--flip hero__photo">
+          <img class="media__img" src="https://www.figma.com/api/mcp/asset/49130f29-901b-4e59-b52f-f9661e2c82c5.png" alt="Red over-ear headphones">
+        </div>
+        <div class="hero__badge">
+          <img class="hero__badge-bg" src="https://www.figma.com/api/mcp/asset/b4841670-5123-4315-a7ed-b5ac441df526.svg" alt="">
+          <p class="hero__badge-text">30%<br>off</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="shortcuts" aria-label="Your shortcuts">
+      <div class="shortcuts__item shortcuts__item--profile">
+        <div class="media shortcuts__media shortcuts__media--avatar">
+          <img class="media__img" src="https://www.figma.com/api/mcp/asset/bd74753d-4510-4280-8a7e-5ac4aec5d34d.png" alt="Cartoon avatar of a smiling man in a dark jacket">
+        </div>
+        <p class="shortcuts__text shortcuts__text--profile">Hi, tommos<br>recomandation<br>for you</p>
+      </div>
+      <div class="shortcuts__item shortcuts__item--orders">
+        <div class="media shortcuts__media shortcuts__media--boxes">
+          <img class="media__img" src="https://www.figma.com/api/mcp/asset/2ae12128-5c6c-4133-9e55-925d74e54ac7.png" alt="Stack of brown cardboard delivery boxes">
+        </div>
+        <p class="shortcuts__text shortcuts__text--orders">Your orders</p>
+        <a class="shortcuts__link" href="#">View your orders</a>
+      </div>
+      <div class="shortcuts__item shortcuts__item--electronics">
+        <div class="media shortcuts__media shortcuts__media--headphones">
+          <img class="media__img" src="https://www.figma.com/api/mcp/asset/3005d14d-0b8b-4699-965d-7c8983456b51.png" alt="Black over-ear headphones">
+        </div>
+        <p class="shortcuts__text shortcuts__text--electronics">Electronics<span class="shortcuts__sub">Big sale 30%off</span></p>
+      </div>
+      <div class="shortcuts__item shortcuts__item--kitchen">
+        <div class="media shortcuts__media shortcuts__media--kettle">
+          <img class="media__img" src="https://www.figma.com/api/mcp/asset/c418fa86-2c0c-4ad7-bf3a-3f830b68fc2f.png" alt="Stainless steel electric kettle">
+        </div>
+        <p class="shortcuts__text shortcuts__text--kitchen">Home and kichen<span class="shortcuts__sub">Big sale 40%off</span></p>
+      </div>
+    </section>
+
+    <section class="categories" aria-labelledby="categories-title">
+      <h2 class="categories__title" id="categories-title">Shope By Catagaries</h2>
+      <ul class="categories__list">
+        <li class="categories__card categories__card--beauty">
+          <div class="media media--cover categories__media">
+            <img class="media__img" src="https://www.figma.com/api/mcp/asset/54516dfa-85d0-406a-83d3-cecd6f3c6cfd.png" alt="Assorted makeup products, lipsticks and nail polish">
+          </div>
+          <a class="categories__label" href="#">Beauty piks</a>
+        </li>
+        <li class="categories__card categories__card--computer">
+          <div class="media categories__media">
+            <img class="media__img" src="https://www.figma.com/api/mcp/asset/b037e942-0d8c-45e6-bb3d-9d1a66275685.png" alt="Laptop showing a blue Windows desktop">
+          </div>
+          <a class="categories__label" href="#">Computer &amp; accesaries</a>
+        </li>
+        <li class="categories__card categories__card--vr">
+          <div class="media media--cover media--flip categories__media">
+            <img class="media__img" src="https://www.figma.com/api/mcp/asset/bea17279-f625-4ab7-b419-6534fd6f8b49.png" alt="Colorful virtual reality headset">
+          </div>
+          <a class="categories__label" href="#">vedio games</a>
+        </li>
+        <li class="categories__card categories__card--toy">
+          <div class="media media--cover categories__media">
+            <img class="media__img" src="https://www.figma.com/api/mcp/asset/e49bc03c-aa89-4fba-8689-0d19329563bb.png" alt="Cute cartoon puppy toy">
+          </div>
+          <a class="categories__label" href="#">Toy &amp; Games</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="promos" aria-label="Promotions">
+      <article class="promos__card promos__card--basic">
+        <div class="promos__body">
+          <h2 class="promos__title">Amazone Basic</h2>
+          <p class="promos__text">Shope Today ,s Deals, Lighning Deals , and<br>Emited - time discount </p>
+          <a class="promos__link" href="#">See more</a>
+        </div>
+        <div class="media promos__media">
+          <img class="media__img" src="https://www.figma.com/api/mcp/asset/3825c7da-8594-4be7-97e0-5798ddeb0f4d.png" alt="Black video game controller with blue lighting">
+        </div>
+      </article>
+      <article class="promos__card promos__card--deals">
+        <div class="promos__body">
+          <h2 class="promos__title">Deals &amp; pramotion</h2>
+          <p class="promos__text">Sho Today ,s Deals, lightining Deals , and <br>limited time discount</p>
+          <a class="promos__link" href="#">See More</a>
+        </div>
+        <div class="media promos__media">
+          <img class="media__img" src="https://www.figma.com/api/mcp/asset/d4d9145e-1bed-4e14-a932-3e3fbde1b35b.png" alt="Black analog wall clock">
+        </div>
+      </article>
+    </section>
+
+    <section class="delivery" aria-labelledby="delivery-title">
+      <div class="delivery__body">
+        <h2 class="delivery__title" id="delivery-title">Amazon Dilivery <br>To You</h2>
+        <p class="delivery__text">&nbsp;Worldwide shiping We ship to over 100 countries and<br>regions right to you doorstep</p>
+        <span class="delivery__smile"><img src="https://www.figma.com/api/mcp/asset/119f8c09-65bc-4ffe-94fe-a2f38633ab02.svg" alt=""></span>
+        <a class="button delivery__button" href="#">View more</a>
+      </div>
+      <div class="media delivery__media">
+        <img class="media__img" src="https://www.figma.com/api/mcp/asset/655c70da-f335-4360-ba75-c5ecc49fd5cb.png" alt="Tabby cat peeking out of a cardboard box">
+      </div>
+    </section>
+
+    <section class="products" aria-labelledby="products-title">
+      <h2 class="products__label" id="products-title">Last Viewed</h2>
+      <div class="products__list">
+
+        <article class="product product--one">
+          <div class="media media--cover product__media">
+            <img class="media__img" src="https://www.figma.com/api/mcp/asset/75530773-0509-4718-929d-a5b601e6e0c1.png" alt="Blue and black Nike Air Max running shoe">
+          </div>
+          <p class="product__shop">Shope Ukries</p>
+          <h3 class="product__name">NIKE</h3>
+          <p class="product__type">SHOES AIR MAX</p>
+          <div class="product__rating">
+            <div class="product__stars" role="img" aria-label="Rated 5 out of 5 stars">
+              <img src="https://www.figma.com/api/mcp/asset/95ad71b3-f2e5-44b3-b0e1-679d7041c221.svg" alt="" width="16" height="16">
+              <img src="https://www.figma.com/api/mcp/asset/95ad71b3-f2e5-44b3-b0e1-679d7041c221.svg" alt="" width="16" height="16">
+              <img src="https://www.figma.com/api/mcp/asset/95ad71b3-f2e5-44b3-b0e1-679d7041c221.svg" alt="" width="16" height="16">
+              <img src="https://www.figma.com/api/mcp/asset/95ad71b3-f2e5-44b3-b0e1-679d7041c221.svg" alt="" width="16" height="16">
+              <img src="https://www.figma.com/api/mcp/asset/95ad71b3-f2e5-44b3-b0e1-679d7041c221.svg" alt="" width="16" height="16">
+            </div>
+            <p class="product__review">Honest Review</p>
+          </div>
+          <p class="product__price">
+            <img class="product__currency" src="https://www.figma.com/api/mcp/asset/de778853-4fce-407f-b857-65d8a4ab1fd3.svg" alt="Indian rupee">
+            <span class="product__amount">2,500</span>
+          </p>
+        </article>
+
+        <article class="product product--two">
+          <div class="media product__media">
+            <img class="media__img" src="https://www.figma.com/api/mcp/asset/944518f5-0008-4110-a064-6fe03bacc7d4.png" alt="Yellow Puma running shoe">
+          </div>
+          <p class="product__shop">Shope Ukries</p>
+          <h3 class="product__name">PUMA</h3>
+          <p class="product__type">Running Shoes</p>
+          <div class="product__rating">
+            <div class="product__stars" role="img" aria-label="Rated 3 out of 5 stars">
+              <img src="https://www.figma.com/api/mcp/asset/9d550acb-8aef-4565-9869-acab118ea22d.svg" alt="" width="16" height="16">
+              <img src="https://www.figma.com/api/mcp/asset/7f2a7e76-9467-4df1-a708-2b19e0aa8993.svg" alt="" width="16" height="16">
+              <img src="https://www.figma.com/api/mcp/asset/9d550acb-8aef-4565-9869-acab118ea22d.svg" alt="" width="16" height="16">
+            </div>
+            <p class="product__review">Honest Review</p>
+          </div>
+          <p class="product__price">
+            <img class="product__currency" src="https://www.figma.com/api/mcp/asset/de778853-4fce-407f-b857-65d8a4ab1fd3.svg" alt="Indian rupee">
+            <span class="product__amount">3,500</span>
+          </p>
+        </article>
+
+        <article class="product product--three">
+          <div class="media media--cover product__media">
+            <img class="media__img" src="https://www.figma.com/api/mcp/asset/17a8e206-25e1-46cd-b483-e2358d735632.png" alt="White, black and orange Nike Air Jordan sneaker">
+          </div>
+          <p class="product__shop">Shope Ukries</p>
+          <h3 class="product__name">NIKE</h3>
+          <p class="product__type">SHOES AIR MAX</p>
+          <div class="product__rating">
+            <div class="product__stars" role="img" aria-label="Rated 5 out of 5 stars">
+              <img src="https://www.figma.com/api/mcp/asset/9d550acb-8aef-4565-9869-acab118ea22d.svg" alt="" width="16" height="16">
+              <img src="https://www.figma.com/api/mcp/asset/9d550acb-8aef-4565-9869-acab118ea22d.svg" alt="" width="16" height="16">
+              <img src="https://www.figma.com/api/mcp/asset/9d550acb-8aef-4565-9869-acab118ea22d.svg" alt="" width="16" height="16">
+              <img src="https://www.figma.com/api/mcp/asset/9d550acb-8aef-4565-9869-acab118ea22d.svg" alt="" width="16" height="16">
+              <img src="https://www.figma.com/api/mcp/asset/9d550acb-8aef-4565-9869-acab118ea22d.svg" alt="" width="16" height="16">
+            </div>
+            <p class="product__review">Honest Review</p>
+          </div>
+          <p class="product__price">
+            <img class="product__currency" src="https://www.figma.com/api/mcp/asset/de778853-4fce-407f-b857-65d8a4ab1fd3.svg" alt="Indian rupee">
+            <span class="product__amount">3,500</span>
+          </p>
+        </article>
+
+        <article class="product product--four">
+          <div class="media media--cover media--flip product__media">
+            <img class="media__img" src="https://www.figma.com/api/mcp/asset/948ad35c-629b-4918-b028-b9ba9a115479.png" alt="Teal and pink Nike Air Max sneaker">
+          </div>
+          <p class="product__shop">Shope Ukries</p>
+          <h3 class="product__name">NIKE</h3>
+          <p class="product__type">SHOES AIR MAX</p>
+          <div class="product__rating">
+            <div class="product__stars" role="img" aria-label="Rated 4 out of 5 stars">
+              <img src="https://www.figma.com/api/mcp/asset/9d550acb-8aef-4565-9869-acab118ea22d.svg" alt="" width="16" height="16">
+              <img src="https://www.figma.com/api/mcp/asset/9d550acb-8aef-4565-9869-acab118ea22d.svg" alt="" width="16" height="16">
+              <img src="https://www.figma.com/api/mcp/asset/9d550acb-8aef-4565-9869-acab118ea22d.svg" alt="" width="16" height="16">
+              <img src="https://www.figma.com/api/mcp/asset/9d550acb-8aef-4565-9869-acab118ea22d.svg" alt="" width="16" height="16">
+            </div>
+            <p class="product__review">Honest Review</p>
+          </div>
+          <p class="product__price">
+            <img class="product__currency" src="https://www.figma.com/api/mcp/asset/de778853-4fce-407f-b857-65d8a4ab1fd3.svg" alt="Indian rupee">
+            <span class="product__amount">3,500</span>
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="fashion" aria-label="Fashion">
+      <article class="fashion__card fashion__card--her">
+        <div class="fashion__body">
+          <h2 class="fashion__title">Comfy Styles for<br>her</h2>
+          <p class="fashion__text">&nbsp;Shope Amazon Fashion including <br>clothing , shoes, jwellry , watches ,bags<br>and more</p>
+        </div>
+        <div class="fashion__item">
+          <div class="media fashion__thumb">
+            <img class="media__img" src="https://www.figma.com/api/mcp/asset/675ab369-ed3c-48e0-a5e9-011ac7961ff2.png" alt="Brown leather handbag">
+          </div>
+          <div class="fashion__item-text">
+            <p class="fashion__name">Top Handbags</p>
+            <p class="fashion__sale">Big sale 30% off</p>
+          </div>
+        </div>
+        <div class="media fashion__model">
+          <img class="media__img" src="https://www.figma.com/api/mcp/asset/d0dae2f6-a904-4833-b962-0dd88c127e62.png" alt="Woman in a navy blazer and trousers posing with her hand out">
+        </div>
+      </article>
+
+      <article class="fashion__card fashion__card--him">
+        <div class="fashion__body">
+          <h2 class="fashion__title">Comfy styles for<br>him</h2>
+          <p class="fashion__text">&nbsp;Shope Amazon Fashion including <br>clothing , shoes, jwellry , watches ,bags<br>and more</p>
+        </div>
+        <div class="fashion__item">
+          <div class="media fashion__thumb">
+            <img class="media__img" src="https://www.figma.com/api/mcp/asset/be6f75fc-1ade-4e4c-9dc3-76c3222704f6.png" alt="Folded stack of checkered shirts">
+          </div>
+          <div class="fashion__item-text">
+            <p class="fashion__name">Checkred Shirts</p>
+            <p class="fashion__sale">Big sale 40%off</p>
+          </div>
+        </div>
+        <div class="media media--cover fashion__model">
+          <img class="media__img" src="https://www.figma.com/api/mcp/asset/a1249e10-0407-4320-ab71-004e06d44d90.png" alt="Smiling man in a navy suit with arms open">
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__panel">
+      <nav class="footer__column footer__column--about" aria-labelledby="footer-about">
+        <h3 class="footer__heading" id="footer-about">GET to KNOW MORE US</h3>
+        <ul class="footer__list">
+          <li><a href="#">careers</a></li>
+          <li><a href="#">Biog</a></li>
+          <li><a href="#">About Amazon</a></li>
+          <li><a href="#">Invester Relations</a></li>
+          <li><a href="#">Amazon Devices</a></li>
+          <li><a href="#">Amazon Tour</a></li>
+        </ul>
+      </nav>
+      <nav class="footer__column footer__column--earn" aria-labelledby="footer-earn">
+        <h3 class="footer__heading" id="footer-earn">Make Money with Us</h3>
+        <ul class="footer__list">
+          <li><a href="#">sell products on Amazon</a></li>
+          <li><a href="#">Sell apps on Amazon</a></li>
+          <li><a href="#">Become An affiate</a></li>
+          <li><a href="#">Asvertise Your products</a></li>
+          <li><a href="#">Sell - Publish with Us</a></li>
+          <li><a href="#">Host an Hub</a></li>
+          <li><a href="#">see more make Money<br>y with Us</a></li>
+        </ul>
+      </nav>
+      <nav class="footer__column footer__column--help" aria-labelledby="footer-help">
+        <h3 class="footer__heading" id="footer-help">Let Us Help You</h3>
+        <ul class="footer__list">
+          <li><a href="#">Amazon And COVID-19</a></li>
+          <li><a href="#">Your Account</a></li>
+          <li><a href="#">your Order</a></li>
+          <li><a href="#">Shipping Rates &amp; policies</a></li>
+          <li><a href="#">Returns &amp; Replacement</a></li>
+          <li><a href="#">Manage Your Conect and Devices</a></li>
+          <li><a href="#">Amazon Acocistes</a></li>
+          <li><a href="#">Help</a></li>
+        </ul>
+      </nav>
+      <nav class="footer__column footer__column--pay" aria-labelledby="footer-pay">
+        <h3 class="footer__heading" id="footer-pay">Amazon Payment Products</h3>
+        <ul class="footer__list">
+          <li><a href="#">Amazon Business Card</a></li>
+          <li><a href="#">Reaload Your Balance</a></li>
+          <li><a href="#">Amazon Currency<br>converter</a></li>
+        </ul>
+      </nav>
+      <a class="footer__more" href="#">View More information</a>
+    </div>
+
+    <div class="footer__legal">
+      <a class="footer__legal-link footer__legal-link--terms" href="#">Condition off us</a>
+      <a class="footer__legal-link footer__legal-link--privacy" href="#">Privacy notice</a>
+      <a class="footer__legal-link footer__legal-link--ads" href="#">Intrest arred adv</a>
+      <p class="footer__legal-note">192898785129 Amazone.in or in offer</p>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  var toggle = document.querySelector('.header__toggle');
+  var menu = document.getElementById('primary-menu');
+  if (!toggle || !menu) return;
+
+  function setOpen(open) {
+    toggle.setAttribute('aria-expanded', String(open));
+    menu.classList.toggle('is-open', open);
+  }
+
+  toggle.addEventListener('click', function () {
+    setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+
+  window.matchMedia('(min-width: 1025px)').addEventListener('change', function (e) {
+    if (e.matches) setOpen(false);
+  });
+})();
+</script>
+</body>
+</html>
